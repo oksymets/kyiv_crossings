@@ -1,0 +1,336 @@
+// ==============
+// Global imports
+// ==============
+@import "base/variables";
+@import "base/mixins";
+@import "base/base";
+@import "components/header";
+@import "components/footer";
+
+.mapboxgl-popup {
+  max-width: 400px;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  color: black;
+}
+
+
+body {
+    height: 100vh;
+    margin-top: 0;
+    color: $main-text;
+
+  background: #0E0E0E;
+}
+
+
+p {
+  font-size: 2em;
+  line-height: 2;
+}
+
+.quote {
+  margin-top:1em;
+  margin-bottom:1em;
+  font-size: 3vh;
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: #B78979;
+  &::before {
+    font-family: Arial;
+    content: "\201C";
+    font-size: 7em;
+    position: relative;
+    left: 0em;
+    top: 0.5em;
+    @media #{$brk-spnarrow} {
+      font-size: 7em;
+    }
+  }
+}
+
+.term {
+  border-bottom: 2px dotted #cccccc;
+  cursor: help;
+
+  &:hover {
+    color: #ccc;
+  }
+}
+
+.sources {
+  color: #BBC0BF;
+  margin-top:0.5em;
+  margin-bottom:2em;
+  font-size: 1.1em;
+}
+
+.directSpeach {
+  font-style: italic;
+}
+
+
+.new-section {
+  margin-top: 5%;
+}
+
+
+
+@media only screen and (min-width:800px) {
+  .mobile {
+    display:none !important;
+    padding-top: 0;
+  }
+
+  .desktop {
+    display:block !important;
+  }
+}
+
+//small screen sizes
+@media only screen and (max-width: 799px) {
+  .mobile {
+    display:block !important;
+  }
+
+  .desktop {
+    display:none !important;
+  }
+}
+
+.read-more {
+  margin-bottom: 15px;
+}
+
+.mobile {
+  p.caption {
+    font-size: 2em;
+    text-align: center;
+    //font-style: italic;
+    //text-transform: uppercase;
+    margin-top: 50px;
+
+    padding-bottom: 0;
+  }
+}
+
+
+.main-text {
+  margin-top: 90px;
+  //background: #f0f0f0;
+}
+
+.small {
+  font-size: 1.2em;
+}
+
+.hsmall {
+  font-size: 1.4em;
+}
+
+h2 span {
+  background-color: #f0f0f0;
+}
+
+
+.toarticle {
+  font-weight: bolder ;
+  font-size: 1.7em;
+  padding-top: 30px;
+}
+
+.toarticle span {
+  background-color: #f0f0f0;
+
+}
+
+
+.tab {
+  margin-bottom: 60px;
+}
+
+.main-text {
+  h3 {
+    font-size: 2.8em;
+    color: #ccc;
+    margin-bottom: 28px;
+  }
+
+  i {
+    font-style: normal;
+    color: brown;
+  }
+}
+
+.disclaimer {
+  font-size: 1.3em;
+}
+
+.disclaimer.main-text {
+  margin-top: 0;
+}
+
+.disclaimer h4 {
+  border-top: 3px solid #383e47;
+  font-weight: 600;
+  padding-top: 0.5em;
+  display: inline-block;
+}
+
+.disclaimer {
+  p, li, h5{
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+.disclaimer h5 {
+  font-weight: 800;
+}
+
+.disclaimer .pointer {
+  cursor: pointer;
+  border-bottom: 1px dashed;
+  display: inline-block;
+}
+
+@media (max-width: 991px) {
+  .header-container img {
+    display: none;
+  }
+  
+}
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+
+  > .col,
+  > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.leaflet-container {
+  background-color:rgba(255,0,0,0.0);
+}
+
+
+.map-container {
+  position: relative;
+}
+
+$map_height: 100vh;
+//$margin: 20px;
+#map {
+  background: #000;
+  width: 100%;
+  height: $map_height;
+}
+
+.map-title {
+
+  position: absolute;
+  left: 150px;
+  top: 50px;
+
+  font-size: 22px;
+  z-index: 999;
+
+}
+
+
+.map-popup-container {
+  font-family: 'Open Sans', Arial, sans-serif;
+
+  font-size: 12px;
+
+  p {
+    font-size: 12px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  p.ul-caption {
+    margin-top: 10px;
+  }
+
+  position: absolute;
+
+  //width: 230px;
+  //height: $map_height - $margin * 2;
+  background: rgba(1,1,1,0.4);
+
+  z-index: 999;
+
+  right: 20px;
+  top: 40px;
+  border-radius: 5px;
+
+  //padding: 10px;
+
+  color: white;
+
+  .cell-data {
+    margin-top: 5px;
+  }
+
+  #ul-container {
+    position: relative;
+    overflow: hidden;
+    max-height: 40vh;
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  ul {
+    padding-left: 0;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: table;
+    width: 100%
+  }
+
+  li {
+    list-style-type: none;
+    display: table-row;
+  }
+
+  li span.date {
+    font-style: italic;
+    color: #999;
+    //padding-left: 40px;
+    display: table-cell;
+  }
+
+  li a {
+    color: #EF5223;
+    display: table-cell;
+  }
+
+  li a:hover,
+  li a.hover {
+    color: #1E90FF;
+    text-decoration: underline;
+  }
+
+  .p-table {display: table}
+  .p-row {display: table-row}
+  .p-cell {display: table-cell}
+
+  /* to make scrollbars always visible */
+  .always-visible.ps > .ps__scrollbar-y-rail {
+    opacity: 0.6;
+  }
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 30px;
+    //color: #ff7800;
+
+    @media #{$brk-spnarrow} {
+      display: none;
+    }
+  }
+}
+
