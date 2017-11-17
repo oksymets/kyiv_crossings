@@ -12,29 +12,63 @@
         hash: true
     });
 
-    map.on('load', function () {
-        d3.json("data/crossings.geojson", function(err, geojson) {
-            if (err) throw err;
+    map.on('load', function (){
+        d3.queue()
+            .defer(d3.json, "data/crossings.geojson")
+            // .defer(d3.csv, "data/fast.csv")
+            .await(function(err, crossings, fast_csv) {
+                if (err) throw err;
+
+                // var fast = {
+                //     "type": "FeatureCollection",
+                //     "crs": {"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}}
+                // };
+                //
+                // fast.features = fast_csv.map(function (row) {
+                //     return { geometry: {type: "Point", coordinates: [+row.X, +row.Y]}}
+                // });
+
+                // map.addLayer({
+                //     'id': 'fast-heat',
+                //     'type': 'heatmap',
+                //     'source': {
+                //         type: 'geojson',
+                //         data: fast
+                //     },
+                //     // 'source-layer': 'sf2010',
+                //     // 'paint': {
+                //     //     'circle-color': "#cc5620",
+                //     //     "circle-opacity": 0.2,
+                //     //     'circle-radius': 5,
+                //     //     "circle-stroke-width": 1,
+                //     //     "circle-stroke-color": "#cc5620"
+                //     //
+                //     // }
+                // }, "place_other");
+
+                map.addLayer({
+                    'id': 'crossings',
+                    'type': 'circle',
+                    'source': {
+                        type: 'geojson',
+                        data: crossings
+                    },
+                    // 'source-layer': 'sf2010',
+                    'paint': {
+                        'circle-color': "#cc5620",
+                        "circle-opacity": 0.6,
+                        'circle-radius': 7,
+                        "circle-stroke-width": 1,
+                        "circle-stroke-color": "#cc5620",
+                        "circle-blur": 1,
+    
+                    }
+                }, "place_other");
+                
 
 
-            map.addLayer({
-                'id': 'crossings',
-                'type': 'circle',
-                'source': {
-                    type: 'geojson',
-                    data: geojson
-                },
-                // 'source-layer': 'sf2010',
-                'paint': {
-                    'circle-color': "#cc5620",
-                    "circle-opacity": 0.2,
-                    'circle-radius': 5,
-                    "circle-stroke-width": 1,
-                    "circle-stroke-color": "#cc5620"
 
-                }
-            }, "place_other");
-        });
+            });
     });
 
     map.on('click', function(e) {
