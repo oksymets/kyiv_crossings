@@ -14,7 +14,7 @@
 
     map.on('load', function (){
         d3.queue()
-            .defer(d3.json, "data/crossings.geojson")
+            .defer(d3.json, "data/crossings_kyiv.geojson")
             .defer(d3.csv, "data/fast.csv")
             .await(function(err, crossings, fast_csv) {
                 if (err) throw err;
