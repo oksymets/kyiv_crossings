@@ -37,12 +37,12 @@
                     },
                     // 'source-layer': 'sf2010',
                     'paint': {
-                        'circle-color': "#f44141",
-                        "circle-opacity": 0.6,
-                        'circle-radius': 7,
+                        'circle-color': "#ff0000",
+                        "circle-opacity": 0.8,
+                        'circle-radius': 10,
                         "circle-stroke-width": 1,
                         "circle-stroke-color": "#f44141",
-                        // "circle-blur": 1,
+                        "circle-blur": 0.8,
 
                     }
                 }, "place_other");
