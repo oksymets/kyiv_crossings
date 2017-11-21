@@ -13,56 +13,56 @@
     });
 
     map.on('load', function (){
-        // d3.queue()
-        //     .defer(d3.json, "data/crossings_kyiv.geojson")
-        //     .defer(d3.csv, "data/fast.csv")
-        //     .await(function(err, crossings, fast_csv) {
-        //         if (err) throw err;
-        //
-        //         var fast = {
-        //             "type": "FeatureCollection",
-        //             "crs": {"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}}
-        //         };
-        //
-        //         fast.features = fast_csv.map(function (row) {
-        //             return { geometry: {type: "Point", coordinates: [+row.X, +row.Y]}}
-        //         });
-        //
-        //         map.addLayer({
-        //             'id': 'crossings',
-        //             'type': 'circle',
-        //             'source': {
-        //                 type: 'geojson',
-        //                 data: crossings
-        //             },
-        //             // 'source-layer': 'sf2010',
-        //             'paint': {
-        //                 'circle-color': "#ff0000",
-        //                 "circle-opacity": 0.8,
-        //                 'circle-radius': 10,
-        //                 "circle-stroke-width": 1,
-        //                 "circle-stroke-color": "#f44141",
-        //                 "circle-blur": 0.8,
-        //
-        //             }
-        //         }, "place_other");
-        //
-        //         map.addLayer({
-        //             'id': 'fast-heat',
-        //             'type': 'circle',
-        //             'source': {
-        //                 type: 'geojson',
-        //                 data: fast
-        //             },
-        //
-        //             "paint": {
-        //                 'circle-color': "#f4d142",
-        //                 'circle-radius': 5,
-        //                 "circle-opacity": 0.1,
-        //             }
-        //         }, "place_other");
-        //
-        //     });
+        d3.queue()
+            .defer(d3.json, "data/crossings_kyiv.geojson")
+            .defer(d3.csv, "data/fast.csv")
+            .await(function(err, crossings, fast_csv) {
+                if (err) throw err;
+        
+                var fast = {
+                    "type": "FeatureCollection",
+                    "crs": {"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}}
+                };
+        
+                fast.features = fast_csv.map(function (row) {
+                    return { geometry: {type: "Point", coordinates: [+row.X, +row.Y]}}
+                });
+        
+                map.addLayer({
+                    'id': 'crossings',
+                    'type': 'circle',
+                    'source': {
+                        type: 'geojson',
+                        data: crossings
+                    },
+                    // 'source-layer': 'sf2010',
+                    'paint': {
+                        'circle-color': "#ff0000",
+                        "circle-opacity": 0.8,
+                        'circle-radius': 10,
+                        "circle-stroke-width": 1,
+                        "circle-stroke-color": "#f44141",
+                        "circle-blur": 0.8,
+        
+                    }
+                }, "place_other");
+        
+                map.addLayer({
+                    'id': 'fast-heat',
+                    'type': 'circle',
+                    'source': {
+                        type: 'geojson',
+                        data: fast
+                    },
+        
+                    "paint": {
+                        'circle-color': "#f4d142",
+                        'circle-radius': 5,
+                        "circle-opacity": 0.1,
+                    }
+                }, "place_other");
+        
+            });
     });
 
     map.on('click', function(e) {
