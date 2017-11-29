@@ -30,10 +30,9 @@
 }
 
 .header-container {
-  background: url("./../img/cover.jpg");
   background-size: cover;
   -moz-background-size: cover;
-  background-position: center;
+  background: url("./../img/cover.jpg") center;
   //background-position: center;
 
 
