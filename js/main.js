@@ -15,7 +15,7 @@
     map.on('load', function (){
         d3.queue()
             .defer(d3.json, "data/crossings_kyiv.geojson")
-            .defer(d3.csv, "data/fast.csv")
+            .defer(d3.csv, "data/fast_3th.csv")
             .await(function(err, crossings, fast_csv) {
                 if (err) throw err;
         
@@ -27,7 +27,34 @@
                 fast.features = fast_csv.map(function (row) {
                     return { geometry: {type: "Point", coordinates: [+row.X, +row.Y]}}
                 });
-        
+
+                map.addLayer({
+                    'id': 'fast-heat',
+                    'type': 'circle',
+                    'source': {
+                        type: 'geojson',
+                        data: fast
+                    },
+
+                    "paint": {
+                        'circle-color': "#f4d142",
+                        'circle-radius': {
+                            base: 1,
+                            stops: [
+                                [10, 2],
+                                [16, 5]
+                            ]
+                        },
+                        "circle-opacity": {
+                            base: 1,
+                            stops: [
+                                [10, 0.1],
+                                [16, 0.5]
+                            ]
+                        },
+                    }
+                }, "place_other");
+
                 map.addLayer({
                     'id': 'crossings',
                     'type': 'circle',
@@ -39,29 +66,21 @@
                     'paint': {
                         'circle-color': "#ff0000",
                         "circle-opacity": 0.8,
-                        'circle-radius': 10,
+                        'circle-radius': {
+                            base: 1,
+                            stops: [
+                                [10, 5],
+                                [16, 10]
+                            ]
+                        },
                         "circle-stroke-width": 1,
                         "circle-stroke-color": "#f44141",
                         "circle-blur": 0.8,
-        
+
                     }
                 }, "place_other");
-        
-                map.addLayer({
-                    'id': 'fast-heat',
-                    'type': 'circle',
-                    'source': {
-                        type: 'geojson',
-                        data: fast
-                    },
-        
-                    "paint": {
-                        'circle-color': "#f4d142",
-                        'circle-radius': 5,
-                        "circle-opacity": 0.1,
-                    }
-                }, "place_other");
-        
+
+
             });
     });
 
@@ -83,8 +102,8 @@
 
         d3.select(".map-popup-content")
             .append("iframe")
-            .attr("width", 600)
-            .attr("height", 450)
+            .attr("width", "100%")
+            .attr("height", "100%")
             .attr("frameborder", 0)
             .attr("style", "border:0")
             .attr("allowfullscreen", true)

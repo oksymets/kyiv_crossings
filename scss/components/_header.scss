@@ -98,11 +98,11 @@
     position: relative;
     width: 100%;
     bottom: 0;
-    margin-top: -37vw;
+    //margin-top: -37vw;
 
-    @media #{$brk-spnarrow} {
-      margin-top: -2vw;
-    }
+    //@media #{$brk-spnarrow} {
+    //  margin-top: -2vw;
+    //}
   }
 
   @media (min-width: 1281px) {

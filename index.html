@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Переходи в нікуди</title>
+    <title>Як знайти небезпечні пішохідні переходи за допомогою даних?</title>
 
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.css' rel='stylesheet' />
@@ -12,22 +12,22 @@
 
     <meta property="og:site_name" content="ТЕКСТИ.ORG.UA"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:title" content="Вони стежать за тобою. І ти цього хочеш"/>
-    <meta property="og:image" content="http://texty.org.ua/d/cell_towers/img/og.png"/>
+    <meta property="og:title" content="Як знайти небезпечні пішохідні переходи за допомогою даних?"/>
+    <meta property="og:image" content="http://texty.org.ua/kyiv_crossings/img/og.png"/>
     <meta property="og:description" content="Дані з вашого мобільного телефону розкажуть про вас усе - навіть без прослуховування"/>
-    <meta property="og:url" content="http://texty.org.ua/d/cell_towers">
+    <meta property="og:url" content="http://texty.org.ua/kyiv_crossings">
 
     <meta name="twitter:site" content="@textyorgua"/>
     <meta property="twitter:account_id" content="49572937"/>
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:url" content="http://texty.org.ua/d/cell_towers"/>
-    <meta name="twitter:title" content="Вони стежать за тобою. І ти цього хочеш"/>
+    <meta name="twitter:url" content="http://texty.org.ua/kyiv_crossings"/>
+    <meta name="twitter:title" content="Як знайти небезпечні пішохідні переходи за допомогою даних?"/>
     <meta name="twitter:description" content="Дані з вашого мобільного телефону розкажуть про вас усе - навіть без прослуховування"/>
-    <meta name="twitter:image:src" content="http://texty.org.ua/d/cell_towers/img/og.png"/>
+    <meta name="twitter:image:src" content="http://texty.org.ua/kyiv_crossings/img/og.png"/>
     <meta name="twitter:image:width" content="1200"/>
     <meta name="twitter:image:height" content="630"/>
     <!-- Other Meta Tags -->
-    <meta name="title" content="Вони стежать за тобою. І ти цього хочеш">
+    <meta name="title" content="Як знайти небезпечні пішохідні переходи за допомогою даних?">
     <meta name="description" content="Дані з вашого мобільного телефону розкажуть про вас усе - навіть без прослуховування">
 
     <!-- Custom Fonts -->
@@ -63,11 +63,11 @@
             <!--<div class="col-xs-12 col-md-8 col-lg-6 col-md-offset-2 col-lg-offset-3">-->
                 <div class="header">
                     <div class="header-text">
-                        <h1>Вони стежать за тобою.<br/> І ти цього хочеш</h1>
+                        <h1>Як знайти небезпечні пішохідні переходи за допомогою даних?</h1>
                         <p class="subtitle">Дані з вашого мобільного телефону розкажуть про вас усе&nbsp;—&nbsp;навіть без прослуховування. Торік українські суди винесли 100 тисяч вироків за кримінальними справами. І 50 тисяч разів наші суди  давали дозвіл на використання слідчими даних з мобільних телефонів українців.
                         </p>
                         <div class="credits">
-                            <h6>Над проектом працювали: <b>Влад&nbsp;Герасименко</b>, <br/><b>Надя&nbsp;Кельм</b>, <b>Анатолій&nbsp;Бондаренко</b></h6>
+                            <h6>Над проектом працював: <b>Влад&nbsp;Герасименко</b></h6>
                             <h6>Опубліковано: 5 жовтня 2017 року</h6>
                         </div>
                     </div>
@@ -127,18 +127,21 @@
 
 <div class="container-fluid">
     <div class="row-fluid no-gutters">
-        <div class="col-xs-9">
+        <div class="col-xs-8">
 
             <div class="map-container">
-                <div class="map-popup-container">
-                    <!--<h3></h3>-->
-                    <div class="map-popup-content"></div>
-                </div>
+
                 <div id="map"></div>
             </div>
         </div>
-        <div class="col-xs-3">
-            Zhopa
+        <div class="col-xs-4">
+            <div class="map-popup-container">
+                <!--<h3></h3>-->
+                <div class="map-popup-content">
+                    <h3 style="padding-top:200px;">Клікайте на пішохідний перехід на карті щоб побачити фото</h3>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
