@@ -251,6 +251,11 @@ $map_height: 100vh;
     width: 100%;
     height: 100vh;
 
+    iframe {
+      -webkit-filter: contrast(1.2) sepia(.6);
+      filter: contrast(1.2)  sepia(.6);
+    }
+
   }
 
   font-size: 12px;
@@ -324,6 +329,8 @@ $map_height: 100vh;
     color: #1E90FF;
     text-decoration: underline;
   }
+
+  //color: #ffbb22;
 
   .p-table {display: table}
   .p-row {display: table-row}

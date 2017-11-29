@@ -30,12 +30,33 @@
 }
 
 .header-container {
+  background: url("../img/cover.jpg");
+  background-size: cover;
+  -moz-background-size: cover;
+  background-position: center;
+  //background-position: center;
+
 
   h1 {
     text-align: left;
     font-size: 3.6em;
     letter-spacing: 0.03em;
     line-height: 1.4;
+    color: white;
+
+    //margin-top: 5vw;
+
+    //@media #{$brk-medium} {
+    //  margin-top: 20vw;
+    //}
+    //
+    //@media #{$brk-narrow} {
+    //  margin-top: 22vw;
+    //}
+    //
+    //@media #{$brk-spnarrow} {
+    //  margin-top: 8vw;
+    //}
   }
 
 
@@ -45,30 +66,32 @@
   }
 
   p.subtitle {
+    color: white;
     width: auto;
     //line-height: 2.2;
     margin-left: 0;
     padding-top: 2vw;
     font-size: 2em;
     font-weight: 300;
+    //padding-bottom: 200px;
+    //margin-top: 19vw;
 
-    margin-top: 19vw;
-
-    @media #{$brk-medium} {
-      margin-top: 20vw;
-    }
-
-    @media #{$brk-narrow} {
-      margin-top: 22vw;
-    }
-
-    @media #{$brk-spnarrow} {
-      margin-top: 8vw;
-    }
+    //@media #{$brk-medium} {
+    //  margin-top: 20vw;
+    //}
+    //
+    //@media #{$brk-narrow} {
+    //  margin-top: 22vw;
+    //}
+    //
+    //@media #{$brk-spnarrow} {
+    //  margin-top: 8vw;
+    //}
   }
 
 
   .credits {
+    color: white;
 
     h6 {
       font-size: 1.2em;
@@ -79,6 +102,7 @@
       }
     }
 
+    //padding-bottom: 150px;
 
 
     line-height: 1.5em;
@@ -98,6 +122,12 @@
     position: relative;
     width: 100%;
     bottom: 0;
+    padding: 20px;
+    margin-top: 5vw;
+    margin-bottom: 150px;
+    background: rgba(50,50,50,0.5);
+
+
     //margin-top: -37vw;
 
     //@media #{$brk-spnarrow} {

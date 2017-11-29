@@ -37,11 +37,11 @@
                     },
 
                     "paint": {
-                        'circle-color': "#f4d142",
+                        'circle-color': "#ffbb22",
                         'circle-radius': {
                             base: 1,
                             stops: [
-                                [10, 2],
+                                [10, 1],
                                 [16, 5]
                             ]
                         },
@@ -64,17 +64,17 @@
                     },
                     // 'source-layer': 'sf2010',
                     'paint': {
-                        'circle-color': "#ff0000",
+                        'circle-color': "#EF5223",
                         "circle-opacity": 0.8,
                         'circle-radius': {
                             base: 1,
                             stops: [
-                                [10, 5],
+                                [10, 2],
                                 [16, 10]
                             ]
                         },
                         "circle-stroke-width": 1,
-                        "circle-stroke-color": "#f44141",
+                        "circle-stroke-color": "#EF5223",
                         "circle-blur": 0.8,
 
                     }
