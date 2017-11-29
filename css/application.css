@@ -85,7 +85,7 @@ p {
     color: #ffffff; }
 
 .header-container {
-  background: url("../img/cover.jpg");
+  background: url("./../img/cover.jpg");
   background-size: cover;
   -moz-background-size: cover;
   background-position: center; }
