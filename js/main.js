@@ -49,11 +49,11 @@
                             base: 1,
                             stops: [
                                 [10, 0.1],
-                                [16, 0.5]
+                                [16, 0.3]
                             ]
                         },
                     }
-                }, "place_other");
+                });
 
                 map.addLayer({
                     'id': 'crossings',
@@ -73,12 +73,13 @@
                                 [16, 10]
                             ]
                         },
-                        "circle-stroke-width": 1,
-                        "circle-stroke-color": "#EF5223",
-                        "circle-blur": 0.8,
+                        // "circle-stroke-dasharray": [0.1, 1.8],
+                        // "circle-stroke-width": 0.5,
+                        // "circle-stroke-color": "#EF5223",
+                        // "circle-blur": 0.8,
 
                     }
-                }, "place_other");
+                });
 
 
             });
@@ -97,25 +98,30 @@
         var c = feature.geometry.coordinates;
         console.log(c);
 
-        d3.select(".map-popup-content")
-            .selectAll("*").remove();
+        // d3.select(".map-popup-content")
+        //     .selectAll("*").remove();
+        // //
+        // d3.select(".map-popup-content")
+        //     .append("iframe")
+        //     .attr("width", "100%")
+        //     .attr("height", "100%")
+        //     .attr("frameborder", 0)
+        //     .attr("style", "border:0")
+        //     .attr("allowfullscreen", true)
+        //     .attr("src", embed_str([c[0], c[1] - 0.00015]));
 
-        d3.select(".map-popup-content")
-            .append("iframe")
-            .attr("width", "100%")
-            .attr("height", "100%")
-            .attr("frameborder", 0)
-            .attr("style", "border:0")
-            .attr("allowfullscreen", true)
-            .attr("src", embed_str([c[0], c[1] - 0.00015]));
+        var html = iframe({
+            src: embed_str([c[0], c[1] - 0.00015]),
+            width: "100%",
+            height: "100%"
+        });
 
+        // d3.select(".map-popup-content").selectAll("*").remove();
 
-        // var popup = new mapboxgl.Popup()
-        //     .setLngLat(feature.geometry.coordinates)
-        //     .setHTML('<div id=\'popup\' class=\'popup\' style=\'z-index: 10;\'> <h5> Detail: </h5>' +
-        //         '<ul class=\'list-group\'>' +
-        //         '<li class=\'list-group-item\'> osm: ' + feature.properties['osm_id'] + ' </li></ul></div>')
-        //     .addTo(map);
+        var popup = new mapboxgl.Popup()
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML(html)
+            .addTo(map);
     });
 
     map.on('mousemove', function(e) {
@@ -128,6 +134,13 @@
         return "https://www.google.com/maps/embed/v1/streetview?key=AIzaSyDjcBDKy_BzLLd5Uzh_Ihlmyk3uE6GGMBM" +
             "&location=" + c[1] + "," + c[0] +
         "&heading=0&pitch=0&fov=80";
+    }
+
+    function iframe(p) {
+        return "<iframe frameborder='0' style='border:0' allowfullscreen='true' width='{width}' height='{height}' src='{src}'></iframe>"
+            .replace("{width}", p.width)
+            .replace("{height}", p.height)
+            .replace("{src}", p.src)
     }
 
 })();

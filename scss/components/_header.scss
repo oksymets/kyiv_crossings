@@ -32,7 +32,8 @@
 .header-container {
   background-size: cover;
   -moz-background-size: cover;
-  background: url("./../img/cover.jpg") center;
+  //background: url("./../img/cover.jpg") center;
+  background: url("../../img/cover.jpg");
   //background-position: center;
 
 
@@ -67,10 +68,10 @@
   p.subtitle {
     color: white;
     width: auto;
-    //line-height: 2.2;
+    line-height: 1.7;
     margin-left: 0;
     padding-top: 2vw;
-    font-size: 2em;
+    font-size: 1.7em;
     font-weight: 300;
     //padding-bottom: 200px;
     //margin-top: 19vw;
@@ -94,7 +95,7 @@
 
     h6 {
       font-size: 1.2em;
-      line-height: 1.9;
+      line-height: 1.7;
 
       b {
         color: #ccc;
