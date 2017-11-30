@@ -77,16 +77,42 @@
                         // "circle-stroke-width": 0.5,
                         // "circle-stroke-color": "#EF5223",
                         // "circle-blur": 0.8,
-
                     }
+                });
+
+                map.addLayer({
+                    'id': 'crossings-hover',
+                    'type': 'circle',
+                    'source': {
+                        type: 'geojson',
+                        data: crossings
+                    },
+                    'paint': {
+                        'circle-color': "#EF5223",
+                        "circle-opacity": 0.8,
+                        'circle-radius': {
+                            base: 1,
+                            stops: [
+                                [10, 8],
+                                [16, 20]
+                            ]
+                        }
+                        // "circle-stroke-dasharray": [0.1, 1.8],
+                        // "circle-stroke-width": 0.5,
+                        // "circle-stroke-color": "#EF5223",
+                        // "circle-blur": 0.8,
+                    },
+                    filter: ["==", "osm_id", ""]
                 });
 
 
             });
     });
 
-    map.on('click', function(e) {
-        var features = map.queryRenderedFeatures(e.point, {layers: ['crossings']} );
+    map.on('click', "crossings", function(e) {
+        map.setFilter("crossings-hover", ["==", "osm_id", e.features[0].properties.osm_id]);
+
+        var features = e.features;
 
         // if the features have no info, return nothing
         if (!features.length) {
@@ -96,20 +122,8 @@
         var feature = features[0];
 
         var c = feature.geometry.coordinates;
-        console.log(c);
-
-        // d3.select(".map-popup-content")
-        //     .selectAll("*").remove();
-        // //
-        // d3.select(".map-popup-content")
-        //     .append("iframe")
-        //     .attr("width", "100%")
-        //     .attr("height", "100%")
-        //     .attr("frameborder", 0)
-        //     .attr("style", "border:0")
-        //     .attr("allowfullscreen", true)
-        //     .attr("src", embed_str([c[0], c[1] - 0.00015]));
-
+        console.log(feature);
+        
         var html = iframe({
             src: embed_str([c[0], c[1] - 0.00015]),
             width: "100%",
@@ -124,9 +138,12 @@
             .addTo(map);
     });
 
-    map.on('mousemove', function(e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ['crossings'] });
-        map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+    map.on('mousemove', "crossings", function(e) {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    map.on('mouseleave', "crossings", function(e) {
+        map.getCanvas().style.cursor = '';
     });
 
 
@@ -140,7 +157,7 @@
         return "<iframe frameborder='0' style='border:0' allowfullscreen='true' width='{width}' height='{height}' src='{src}'></iframe>"
             .replace("{width}", p.width)
             .replace("{height}", p.height)
-            .replace("{src}", p.src)
+            .replace("{src}", p.src) + "<div class='popup-overlay'></div>"
     }
 
 })();
