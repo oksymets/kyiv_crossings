@@ -12,6 +12,8 @@
         hash: true
     });
 
+    map.addControl(new mapboxgl.NavigationControl());
+
     map.on('load', function (){
         d3.queue()
             .defer(d3.json, "data/crossings_kyiv.geojson")
