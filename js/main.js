@@ -13,6 +13,14 @@
     });
 
     map.addControl(new mapboxgl.NavigationControl());
+    map.scrollZoom.disable();
+
+    var framesPerSecond = 15;
+    var initialOpacity = 1;
+    var opacity = initialOpacity;
+    var initialRadius = 8;
+    var radius = initialRadius;
+    var maxRadius = 18;
 
     map.on('load', function (){
         d3.queue()
@@ -90,15 +98,18 @@
                         data: crossings
                     },
                     'paint': {
-                        'circle-color': "#EF5223",
+                        "circle-color": "#EF5223",
                         "circle-opacity": 0.8,
-                        'circle-radius': {
+                        "circle-radius": {
                             base: 1,
                             stops: [
-                                [10, 8],
-                                [16, 20]
+                                [10, initialRadius],
+                                [16, initialRadius * 2]
                             ]
-                        }
+                        },
+                        "circle-radius-transition": {duration: 0},
+                        "circle-opacity-transition": {duration: 0},
+
                         // "circle-stroke-dasharray": [0.1, 1.8],
                         // "circle-stroke-width": 0.5,
                         // "circle-stroke-color": "#EF5223",
@@ -107,7 +118,27 @@
                     filter: ["==", "osm_id", ""]
                 });
 
+                function animateMarker(timestamp) {
+                    setTimeout(function(){
+                        requestAnimationFrame(animateMarker);
 
+                        radius += (maxRadius - radius) / framesPerSecond;
+                        opacity -= ( .9 / framesPerSecond );
+
+                        map.setPaintProperty('crossings-hover', 'circle-radius', radius);
+                        map.setPaintProperty('crossings-hover', 'circle-opacity', opacity);
+
+                        if (opacity <= 0) {
+                            radius = initialRadius;
+                            opacity = initialOpacity;
+                        }
+
+                    }, 1000 / framesPerSecond);
+
+                }
+
+                // Start the animation.
+                animateMarker(0);
             });
     });
 

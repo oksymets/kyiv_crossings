@@ -31,10 +31,8 @@
 
 .header-container {
   background-size: cover;
-  -moz-background-size: cover;
-  //background: url("./../img/cover.jpg") center;
-  background: url("../../img/cover.jpg");
-  //background-position: center;
+  background: url("../../img/cover.jpg") no-repeat;
+  background-size: 100%;
 
 
   h1 {
