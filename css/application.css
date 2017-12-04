@@ -86,7 +86,7 @@ p {
 
 .header-container {
   background-size: cover;
-  background: url("../../img/cover.jpg") no-repeat;
+  background: url("./../img/cover.jpg") no-repeat;
   background-size: 100%; }
   .header-container h1 {
     text-align: left;
