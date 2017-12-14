@@ -22,11 +22,31 @@
     var radius = initialRadius;
     var maxRadius = 18;
 
+    var projection = (function(){
+        var mercator = d3.geoMercator()
+            .scale(100000)
+            .center([30.598258248737466, 50.46690715898018]);
+
+        var res = function(c){
+            var coords = mercator(c);
+            coords[1] = -coords[1];
+            return coords;
+        };
+
+        res.invert = function(c) {
+            c[1] = -c[1];
+            return mercator.invert(c);
+        };
+
+        return res;
+    })();
+
     map.on('load', function (){
         d3.queue()
             .defer(d3.json, "data/crossings_kyiv.geojson")
+            .defer(d3.json, "data/cameras.geojson")
             .defer(d3.csv, "data/fast_3th.csv")
-            .await(function(err, crossings, fast_csv) {
+            .await(function(err, crossings, cameras, fast_csv) {
                 if (err) throw err;
         
                 var fast = {
@@ -61,7 +81,7 @@
                                 [10, 0.1],
                                 [16, 0.3]
                             ]
-                        },
+                        }
                     }
                 });
 
@@ -82,11 +102,7 @@
                                 [10, 2],
                                 [16, 10]
                             ]
-                        },
-                        // "circle-stroke-dasharray": [0.1, 1.8],
-                        // "circle-stroke-width": 0.5,
-                        // "circle-stroke-color": "#EF5223",
-                        // "circle-blur": 0.8,
+                        }
                     }
                 });
 
@@ -108,12 +124,7 @@
                             ]
                         },
                         "circle-radius-transition": {duration: 0},
-                        "circle-opacity-transition": {duration: 0},
-
-                        // "circle-stroke-dasharray": [0.1, 1.8],
-                        // "circle-stroke-width": 0.5,
-                        // "circle-stroke-color": "#EF5223",
-                        // "circle-blur": 0.8,
+                        "circle-opacity-transition": {duration: 0}
                     },
                     filter: ["==", "osm_id", ""]
                 });
@@ -125,50 +136,51 @@
                         radius += (maxRadius - radius) / framesPerSecond;
                         opacity -= ( .9 / framesPerSecond );
 
-                        map.setPaintProperty('crossings-hover', 'circle-radius', radius);
-                        map.setPaintProperty('crossings-hover', 'circle-opacity', opacity);
-
                         if (opacity <= 0) {
                             radius = initialRadius;
                             opacity = initialOpacity;
                         }
 
-                    }, 1000 / framesPerSecond);
+                        map.setPaintProperty('crossings-hover', 'circle-radius', radius);
+                        map.setPaintProperty('crossings-hover', 'circle-opacity', opacity);
 
+                    }, 1000 / framesPerSecond);
                 }
 
                 // Start the animation.
                 animateMarker(0);
+
+                map.on('click', "crossings", function(e) {
+                    map.setFilter("crossings-hover", ["==", "osm_id", e.features[0].properties.osm_id]);
+
+                    var features = e.features;
+
+                    // if the features have no info, return nothing
+                    if (!features.length) {
+                        return;
+                    }
+
+                    var crossing = features[0];
+                    console.log(crossing);
+
+                    var camera = cameras.features.filter(function(f) {
+                        return f.properties.osm_id == crossing.properties.osm_id
+                    })[0];
+
+                    var html = iframe({
+                        src: embed_str(crossing, camera, 0.2),
+                        width: "100%",
+                        height: "100%"
+                    });
+
+                    var popup = new mapboxgl.Popup()
+                        .setLngLat(crossing.geometry.coordinates)
+                        .setHTML(html)
+                        .addTo(map);
+                });
             });
-    });
 
-    map.on('click', "crossings", function(e) {
-        map.setFilter("crossings-hover", ["==", "osm_id", e.features[0].properties.osm_id]);
 
-        var features = e.features;
-
-        // if the features have no info, return nothing
-        if (!features.length) {
-            return;
-        }
-
-        var feature = features[0];
-
-        var c = feature.geometry.coordinates;
-        console.log(feature);
-        
-        var html = iframe({
-            src: embed_str([c[0], c[1] - 0.00015]),
-            width: "100%",
-            height: "100%"
-        });
-
-        // d3.select(".map-popup-content").selectAll("*").remove();
-
-        var popup = new mapboxgl.Popup()
-            .setLngLat(feature.geometry.coordinates)
-            .setHTML(html)
-            .addTo(map);
     });
 
     map.on('mousemove', "crossings", function(e) {
@@ -180,10 +192,34 @@
     });
 
 
-    function embed_str(c) {
+    function embed_str(crossing, camera, distance) {
+        var crossing_c = crossing.geometry.coordinates;
+        var camera_c = camera.geometry.coordinates;
+
+        var crossing_mercator = projection(crossing_c);
+        var camera_mercator = projection(camera_c);
+
+        var heading = angle(crossing_mercator, camera_mercator);
+
+        var vec = [crossing_mercator[0] - camera_mercator[0], crossing_mercator[1] - camera_mercator[1]];
+        var vec_length = Math.sqrt(Math.pow(vec[0], 2) + Math.pow(vec[1], 2));
+        var vec_cor = [vec[0] / vec_length * distance , vec[1] / vec_length * distance];
+
+        var camera_cor_mercator = [crossing_mercator[0] - vec_cor[0], crossing_mercator[1] - vec_cor[1]];
+
+        var camera_cor = projection.invert(camera_cor_mercator);
+
+        // give here coordinates in mercator
+        function angle(crossing, camera) {
+            var vec = [crossing[0] - camera[0], crossing[1] - camera[1]];
+            var angle = Math.atan2(vec[1], vec[0]) * 180 / Math.PI;
+
+            return (-angle + 90 + 360) % 360;
+        }
+
         return "https://www.google.com/maps/embed/v1/streetview?key=AIzaSyDjcBDKy_BzLLd5Uzh_Ihlmyk3uE6GGMBM" +
-            "&location=" + c[1] + "," + c[0] +
-        "&heading=0&pitch=0&fov=80";
+            "&location=" + camera_cor[1] + "," + camera_cor[0] +
+        "&heading=" + heading + "&pitch=0&fov=80";
     }
 
     function iframe(p) {

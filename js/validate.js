@@ -13,7 +13,7 @@
     });
 
     map.on('load', function () {
-        d3.json("data/crossings.geojson", function(err, geojson) {
+        d3.json("data/crossings_kyiv.geojson", function(err, geojson) {
             if (err) throw err;
 
 
