@@ -43,7 +43,7 @@
 
     map.on('load', function (){
         d3.queue()
-            .defer(d3.json, "data/crossings_kyiv.geojson")
+            .defer(d3.json, "data/crossings.geojson")
             .defer(d3.json, "data/cameras.geojson")
             .defer(d3.csv, "data/fast_3th.csv")
             .await(function(err, crossings, cameras, fast_csv) {
