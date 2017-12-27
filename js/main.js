@@ -196,7 +196,7 @@
                     })[0];
 
                     var html = iframe({
-                        src: embed_str(crossing, camera, 0.2),
+                        src: embed_str(crossing, camera, 0.3),
                         width: "100%",
                         height: "100%"
                     });
