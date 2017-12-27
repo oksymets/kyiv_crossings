@@ -51,7 +51,7 @@ p {
 }
 
 .quote {
-  margin-top: 5em;
+  margin-top: 0em;
   margin-bottom: 1em;
   font-size: 2.3em;
   font-family: 'Open Sans Condensed', sans-serif;
@@ -242,6 +242,7 @@ h2 span {
 .map-container {
   margin-top: 100px;
   position: relative;
+
 }
 
 $map_height: 100vh;
@@ -250,6 +251,19 @@ $map_height: 100vh;
   background: #000;
   width: 100%;
   height: $map_height;
+
+
+  .mapboxgl-popup-close-button {
+    font-size: 22px;
+    color: white;
+    background-color: rgba(1, 1, 1, 0.2);
+    border: medium none;
+    border-radius: 0 3px 0 0;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }
 
 .map-title {
@@ -370,6 +384,8 @@ $map_height: 100vh;
       display: none;
     }
   }
+
+
 }
 
 #calmingCarousel {
