@@ -356,6 +356,8 @@ h2 span {
     position: absolute;
     right: 0;
     top: 0; }
+  #map .mapboxgl-popup-close-button:hover {
+    color: #151515; }
 
 .map-title {
   position: absolute;
