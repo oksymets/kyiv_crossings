@@ -212,13 +212,14 @@ p {
   line-height: 2; }
 
 .quote {
-  margin-top: 1em;
+  margin-top: 5em;
   margin-bottom: 1em;
-  font-size: 3vh;
+  font-size: 2.3em;
   font-family: 'Open Sans Condensed', sans-serif;
-  color: #B78979; }
+  color: #211a23;
+  line-height: 2em; }
   .quote::before {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     content: "\201C";
     font-size: 7em;
     position: relative;
