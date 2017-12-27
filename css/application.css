@@ -416,4 +416,24 @@ h2 span {
       .map-popup-container h3 {
         display: none; } }
 
+#calmingCarousel .item img {
+  margin: 0 auto;
+  width: auto;
+  height: 400px;
+  max-height: 400px; }
+#calmingCarousel .item h3 {
+  display: inline;
+  font-size: 2em;
+  font-weight: normal;
+  margin: 0;
+  color: white;
+  background: rgba(0, 0, 0, 0.15); }
+#calmingCarousel .item p {
+  padding: 0;
+  margin: 0;
+  font-size: 1em; }
+
+#vasa {
+  color: #ffdc99; }
+
 /*# sourceMappingURL=application.css.map */

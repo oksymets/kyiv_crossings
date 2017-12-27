@@ -68,18 +68,22 @@
 
                     "paint": {
                         'circle-color': "#ffbb22",
+                        // 'circle-color': "#76b8ff",
                         'circle-radius': {
                             base: 1,
                             stops: [
-                                [10, 1],
+                                [10, 2],
                                 [16, 5]
                             ]
                         },
                         "circle-opacity": {
-                            base: 1,
+                            base: 2,
                             stops: [
-                                [10, 0.1],
-                                [16, 0.3]
+                                [10, 0.05],
+                                [11, 0.05],
+                                [12, 0.1],
+                                [16, 0.3],
+                                [18, 0.7]
                             ]
                         }
                     }
@@ -99,8 +103,9 @@
                         'circle-radius': {
                             base: 1,
                             stops: [
-                                [10, 2],
-                                [16, 10]
+                                [10, 4],
+                                [16, 10],
+                                [18, 14]
                             ]
                         }
                     }
@@ -120,13 +125,36 @@
                             base: 1,
                             stops: [
                                 [10, initialRadius],
-                                [16, initialRadius * 2]
+                                [16, initialRadius * 2],
+                                [18, initialRadius * 3]
                             ]
                         },
                         "circle-radius-transition": {duration: 0},
                         "circle-opacity-transition": {duration: 0}
                     },
                     filter: ["==", "osm_id", ""]
+                });
+
+                map.addLayer({
+                    'id': 'crossings-clickable',
+                    'type': 'circle',
+                    'source': {
+                        type: 'geojson',
+                        data: crossings
+                    },
+                    // 'source-layer': 'sf2010',
+                    'paint': {
+                        'circle-color': "#EF5223",
+                        "circle-opacity": 0.1,
+                        'circle-radius': {
+                            base: 1,
+                            stops: [
+                                [10, 4 + 8],
+                                [16, 10 + 6],
+                                [18, 14 + 4]
+                            ]
+                        }
+                    }
                 });
 
                 function animateMarker(timestamp) {
@@ -150,7 +178,7 @@
                 // Start the animation.
                 animateMarker(0);
 
-                map.on('click', "crossings", function(e) {
+                map.on('click', "crossings-clickable", function(e) {
                     map.setFilter("crossings-hover", ["==", "osm_id", e.features[0].properties.osm_id]);
 
                     var features = e.features;
@@ -183,14 +211,13 @@
 
     });
 
-    map.on('mousemove', "crossings", function(e) {
+    map.on('mousemove', "crossings-clickable", function(e) {
         map.getCanvas().style.cursor = 'pointer';
     });
 
-    map.on('mouseleave', "crossings", function(e) {
+    map.on('mouseleave', "crossings-clickable", function(e) {
         map.getCanvas().style.cursor = '';
     });
-
 
     function embed_str(crossing, camera, distance) {
         var crossing_c = crossing.geometry.coordinates;
