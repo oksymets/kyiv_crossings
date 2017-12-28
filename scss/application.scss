@@ -429,6 +429,19 @@ $map_height: 100vh;
   }
 }
 
+.figure {
+  margin-bottom: 5em;
+
+  img {
+    width: 100%;
+  }
+
+  .figcaption {
+    text-align: center;
+    font-size: 1em;
+  }
+}
+
 #vasa {
   color: #ffdc99
 }

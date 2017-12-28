@@ -450,6 +450,14 @@ h2 span {
   margin: 0;
   font-size: 1em; }
 
+.figure {
+  margin-bottom: 5em; }
+  .figure img {
+    width: 100%; }
+  .figure .figcaption {
+    text-align: center;
+    font-size: 1em; }
+
 #vasa {
   color: #ffdc99; }
 
