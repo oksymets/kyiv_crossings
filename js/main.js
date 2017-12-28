@@ -206,10 +206,12 @@
                         .setLngLat(crossing.geometry.coordinates)
                         .setHTML(html)
                         .addTo(map);
+
+                    popup.on('close', function(e) {
+                        map.setFilter("crossings-hover", ["==", "osm_id", ""]);
+                    })
                 });
             });
-
-
     });
 
     map.on('mousemove', "crossings-clickable", function(e) {
