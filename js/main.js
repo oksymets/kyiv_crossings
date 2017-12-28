@@ -59,34 +59,87 @@
                     return { geometry: {type: "Point", coordinates: [+row.X, +row.Y]}}
                 });
 
+                // map.addLayer({
+                //     'id': 'fast-heat',
+                //     'type': 'circle',
+                //     'source': {
+                //         type: 'geojson',
+                //         data: fast
+                //     },
+                //
+                //     "paint": {
+                //         'circle-color': "#ffbb22",
+                //         // 'circle-color': "#76b8ff",
+                //         'circle-radius': {
+                //             base: 1,
+                //             stops: [
+                //                 [10, 2],
+                //                 [16, 5]
+                //             ]
+                //         },
+                //         "circle-opacity": {
+                //             base: 2,
+                //             stops: [
+                //                 [10, 0.05],
+                //                 [11, 0.05],
+                //                 [12, 0.1],
+                //                 [16, 0.3],
+                //                 [18, 0.7]
+                //             ]
+                //         }
+                //     }
+                // });
+
                 map.addLayer({
-                    'id': 'fast-heat',
-                    'type': 'circle',
-                    'source': {
-                        type: 'geojson',
+                    "id": "earthquakes-heat",
+                    "type": "heatmap",
+                    "source": {
+                        type: "geojson",
                         data: fast
                     },
-
+                    "maxzoom": 16,
                     "paint": {
-                        'circle-color': "#ffbb22",
-                        // 'circle-color': "#76b8ff",
-                        'circle-radius': {
-                            base: 1,
-                            stops: [
-                                [10, 2],
-                                [16, 5]
+                        //Increase the heatmap weight based on frequency and property magnitude
+                        // "heatmap-weight": 1,
+                        "heatmap-weight": {
+                            // "property": "mag",
+                            // "type": "interval",
+                            "stops": [
+                                [0, 0.1],
+                                [16, 0.1]
                             ]
                         },
-                        "circle-opacity": {
-                            base: 2,
-                            stops: [
-                                [10, 0.05],
-                                [11, 0.05],
-                                [12, 0.1],
-                                [16, 0.3],
-                                [18, 0.7]
+                        //Increase the heatmap color weight weight by zoom level
+                        //heatmap-intensity is a multiplier on top of heatmap-weight
+                        "heatmap-intensity": {
+                            "stops": [
+                                [0, 1],
+                                [16, 1]
                             ]
-                        }
+                        },
+                        //Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
+                        //Begin color ramp at 0-stop with a 0-transparancy color
+                        //to create a blur-like effect.
+                        "heatmap-color": [
+                            "interpolate",
+                            ["linear"],
+                            ["heatmap-density"],
+                            0, "rgb(254,237,222)",
+                            0.2, "rgb(254,237,222)",
+                            0.4, "rgb(253,190,133)",
+                            0.6, "rgb(253,141,60)",
+                            0.8, "rgb(230,85,13)",
+                            1, "rgb(166,54,3)"
+                        ],
+                        //Adjust the heatmap radius by zoom level
+                        "heatmap-radius": {
+                            "stops": [
+                                [0, 6],
+                                [16, 6]
+                            ]
+                        },
+                        //Transition from heatmap to circle layer by zoom level
+                        "heatmap-opacity": 1,
                     }
                 });
 
