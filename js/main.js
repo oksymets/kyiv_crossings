@@ -9,7 +9,8 @@
         maxZoom: 18,
         zoom: 11,
         center: [30.598258248737466, 50.46690715898018],
-        hash: true
+        hash: true,
+        tap: false
     });
 
     map.addControl(new mapboxgl.NavigationControl());

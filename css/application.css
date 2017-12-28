@@ -198,6 +198,7 @@ p {
 
 .mapboxgl-popup-content {
   width: 600px;
+  max-width: 90vw;
   height: 350px;
   font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
   color: black; }
@@ -259,7 +260,10 @@ p {
     display: block !important; }
 
   .desktop {
-    display: none !important; } }
+    display: none !important; }
+
+  #map {
+    max-height: 85vh; } }
 .read-more {
   margin-bottom: 15px; }
 
