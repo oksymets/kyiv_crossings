@@ -98,7 +98,7 @@
                     "type": "circle",
                     "source": {
                         type: "vector",
-                        tiles: ["http://drimacus182.github.io/kyiv_crossings/data/fast_points/{z}/{x}/{y}.pbf"]
+                        tiles: ["https://drimacus182.github.io/kyiv_crossings/data/fast_points/{z}/{x}/{y}.pbf"]
                     },
                     "source-layer": "fast",
                     "maxzoom": 16,
