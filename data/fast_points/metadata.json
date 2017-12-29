@@ -1,0 +1,16 @@
+{
+    "density_gamma": "2.5", 
+    "attribution": "", 
+    "name": "out.mbtiles", 
+    "format": "pbf", 
+    "density_levels": "50", 
+    "description": "out.mbtiles", 
+    "json": "{\"vector_layers\": [ { \"id\": \"fast\", \"description\": \"\", \"minzoom\": 0, \"maxzoom\": 16, \"fields\": {\"density\": \"Number\"} } ],\"tilestats\": {\"layerCount\": 1,\"layers\": [{\"layer\": \"fast\",\"count\": 311304,\"geometry\": \"Point\",\"attributeCount\": 1,\"attributes\": [{\"attribute\": \"density\",\"count\": 49,\"type\": \"number\",\"values\": [1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,6,7,8,9],\"min\": 1,\"max\": 49}]}]}}", 
+    "bounds": "30.240726,50.235567,30.753994,50.585634", 
+    "minzoom": "0", 
+    "version": "2", 
+    "max_density": "115150,66509,38414,22187,12815,7401,4275,2469,1426,823,475,274,158,91,52,30,17,", 
+    "maxzoom": "16", 
+    "type": "overlay", 
+    "center": "30.546799,50.493665,16"
+}
