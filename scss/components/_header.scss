@@ -33,7 +33,9 @@
 .header-container {
   background-size: cover;
   background: url("./../img/cover.jpg") no-repeat;
-  background-size: 100%;
+  //background-size: 100%;
+  background-size: cover;
+  background-position: center;
 
 
   h1 {

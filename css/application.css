@@ -88,7 +88,8 @@ p {
 .header-container {
   background-size: cover;
   background: url("./../img/cover.jpg") no-repeat;
-  background-size: 100%; }
+  background-size: cover;
+  background-position: center; }
   .header-container h1 {
     text-align: left;
     font-size: 3.6em;
@@ -494,5 +495,8 @@ h2 span {
 
 .social-icons {
   right: 55px; }
+
+.mobile .header {
+  box-shadow: 0 0 70px 70px rgba(50, 50, 50, 0.5); }
 
 /*# sourceMappingURL=application.css.map */
