@@ -76,7 +76,8 @@ p {
 .fa-twitter,
 .fa-facebook {
   padding: 5px;
-  color: #ddd;
+  color: #6c6c6c;
+  background: white;
   float: right;
   margin: 5px 10px 0px 0px;
   cursor: pointer; }
@@ -490,5 +491,8 @@ h2 span {
 
 #vasa {
   color: #ffdc99; }
+
+.social-icons {
+  right: 55px; }
 
 /*# sourceMappingURL=application.css.map */
