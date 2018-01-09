@@ -101,7 +101,7 @@
                         tiles: ["https://drimacus182.github.io/kyiv_crossings/data/fast_points/{z}/{x}/{y}.pbf"]
                     },
                     "source-layer": "fast",
-                    "maxzoom": 16,
+                    // "maxzoom": 16,
                     // "paint": {
                         //Increase the heatmap weight based on frequency and property magnitude
                         // "heatmap-weight": 1,
