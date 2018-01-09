@@ -259,7 +259,7 @@
                 animateMarker(0);
 
                 map.on('click', "crossings-clickable", function(e) {
-                    map.setFilter("crossings-hover", ["==", "osm_id", e.features[0].properties.osm_id]);
+                    map.setFilter("crossings-hover", ["==", "osm_id", e.features[0].properties.osm_id.toString()]);
 
                     var features = e.features;
 
