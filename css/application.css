@@ -495,4 +495,10 @@ h2 span {
 .mobile .header {
   box-shadow: 0 0 70px 70px rgba(50, 50, 50, 0.5); }
 
+.disclaimer {
+  color: #eee;
+  font-size: 1.3em;
+  margin-left: 15px;
+  margin-top: 68px; }
+
 /*# sourceMappingURL=application.css.map */
